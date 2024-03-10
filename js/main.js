@@ -3,7 +3,7 @@ const data = [
       id: 1,
       name: "Кетчуп",
       price: 0,
-      cnt: 1,
+      cnt: 0,
    },
    {
       id: 2,
@@ -32,10 +32,13 @@ const total_price = document.querySelector(".price");
 function get() {
    if (data[0].cnt > 0) {
       free_sauce.textContent = 1;
+      data[0].price = 60;
    } else {
       free_sauce.textContent = 0;
+      data[0].price = 0;
    }
    list.innerHTML = "";
+
    data.forEach((item) => {
       const li = document.createElement("li");
       const left = document.createElement("div");
@@ -49,15 +52,19 @@ function get() {
       right.className = "right";
       const inc = document.createElement("button");
       inc.textContent = "-";
-      inc.onclick = () => {
-         data.forEach((e) => {
-            if (e.id === item.id) {
-               data[e.id - 1].cnt--;
-            }
-         });
-         total();
-         get();
-      };
+      inc.style.opacity = '30%'
+      if (item.cnt > 0) {
+         inc.style.opacity = '100%'
+         inc.onclick = () => {
+            data.forEach((e) => {
+               if (e.id === item.id) {
+                  data[e.id - 1].cnt--;
+               }
+            });
+            total();
+            get();
+         };
+      }
       const cnt = document.createElement("p");
       cnt.textContent = item.cnt;
       const dec = document.createElement("button");
@@ -86,9 +93,10 @@ get();
 
 function total() {
    const total = data
-      .map((e) => e.price * e.cnt)
-      .reduce((a, b) => a + b)
-   console.log(total);
+      .map((e) =>
+         e.id === 1 && e.cnt > 0 ? e.price * (e.cnt - 1) : e.price * e.cnt
+      )
+      .reduce((a, b) => a + b);
    total_price.textContent = `${220 + total} ₽`;
 }
 total();
