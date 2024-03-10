@@ -9,6 +9,12 @@ body {
    grid-template-columns: 40% auto;
    gap: 32px;
    font-family: "Manrope", sans-serif;
+   max-width: 1000px;
+   margin: 0 auto;
+
+   @media (max-width: 700px) {
+      grid-template-columns: 1fr;
+   }
 
    .left-box {
       img {
@@ -23,6 +29,9 @@ body {
          flex-direction: column;
          gap: 12px;
          padding: 0 8px;
+         @media (max-width: 700px) {
+            padding: 0;
+         }
 
          li {
             display: flex;
@@ -37,6 +46,123 @@ body {
    }
 
    .right-box {
-      border: 1px solid;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      @media (max-width: 700px) {
+         margin-top: 15px;
+         gap: 20px;
+      }
+
+      .top {
+         display: flex;
+         flex-direction: column;
+         gap: 24px;
+
+         .name {
+            p:nth-child(1) {
+               font-weight: 700;
+               font-size: 24px;
+            }
+            p:nth-child(2) {
+               margin-top: 8px;
+               color: #787878;
+               font-size: 18px;
+            }
+         }
+
+         .sauces-box {
+
+            .sauces-txt1 {
+               display: flex;
+               justify-content: space-between;
+
+               p:nth-child(1) {
+                  font-weight: 700;
+                  font-size: 18px;
+               }
+               p:nth-child(2) {
+                  font-size: 16px;
+                  color: #787878;
+               }
+            }
+
+            .sauces-list {
+               margin-top: 12px;
+               display: flex;
+               flex-direction: column;
+               gap: 8px;
+
+               li {
+                  background-color: #F6F7F8;
+                  padding: 8px 12px;
+                  border-radius: 5px;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+
+                  .left {
+                     font-size: 18px;
+                     display: flex;
+                     align-items: center;
+
+                     p:nth-child(2) {
+                        color: #787878;
+                        margin-left: 8px;
+                     }
+                  }
+
+                  .right {
+                     display: flex;
+                     align-items: center;
+                     gap: 8px;
+                     
+                     p {
+                        font-size: 18px;
+                        font-weight: 500;
+                        width: 32px;
+                        text-align: center;
+                     }
+
+                     button {
+                        border: none;
+                        background-color: transparent;
+                        cursor: pointer;
+                        font-size: 22px;
+                     }
+                  }
+               }
+            }
+         }
+      }
+
+      hr {
+         border: 1px solid #E6E6E6;
+      }
+
+      .bottom {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+
+         .price {
+            font-weight: 700;
+            font-size: 32px;
+         }
+
+         .btn-add {
+            font-size: 18px;
+            font-weight: 500;
+            color: white;
+            border: 0;
+            cursor: pointer;
+            background-color: #DE341D;
+            border-radius: 100px;
+            padding: 20px 44px;
+         }
+         .btn-add:hover {
+            background-color: #f5442d;
+         }
+      }
    }
 }
