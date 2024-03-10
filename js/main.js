@@ -26,7 +26,8 @@ const data = [
 ];
 
 const list = document.querySelector(".sauces-list");
-const free_sauce = document.querySelector('.free-sauce')
+const free_sauce = document.querySelector(".free-sauce");
+const total_price = document.querySelector(".price");
 
 function get() {
    if (data[0].cnt > 0) {
@@ -34,42 +35,42 @@ function get() {
    } else {
       free_sauce.textContent = 0;
    }
-   list.innerHTML = '';
+   list.innerHTML = "";
    data.forEach((item) => {
       const li = document.createElement("li");
       const left = document.createElement("div");
-      left.className = 'left';
+      left.className = "left";
       const name = document.createElement("p");
       name.textContent = item.name;
       const price = document.createElement("p");
       price.textContent = `+ ${item.price} ₽`;
 
       const right = document.createElement("div");
-      right.className = 'right';
+      right.className = "right";
       const inc = document.createElement("button");
       inc.textContent = "-";
       inc.onclick = () => {
-         data.forEach(e => {
+         data.forEach((e) => {
             if (e.id === item.id) {
-               console.log(e.id);
-               data[e.id - 1].cnt--
-            } 
+               data[e.id - 1].cnt--;
+            }
          });
-         get()
-      }
+         total();
+         get();
+      };
       const cnt = document.createElement("p");
       cnt.textContent = item.cnt;
       const dec = document.createElement("button");
       dec.textContent = "+";
       dec.onclick = () => {
-         data.forEach(e => {
+         data.forEach((e) => {
             if (e.id === item.id) {
-               console.log(e.id);
-               data[e.id - 1].cnt++
-            } 
+               data[e.id - 1].cnt++;
+            }
          });
-         get()
-      }
+         total();
+         get();
+      };
 
       list.appendChild(li);
       li.appendChild(left);
@@ -83,3 +84,11 @@ function get() {
 }
 get();
 
+function total() {
+   const total = data
+      .map((e) => e.price * e.cnt)
+      .reduce((a, b) => a + b)
+   console.log(total);
+   total_price.textContent = `${220 + total} ₽`;
+}
+total();
